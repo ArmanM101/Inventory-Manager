@@ -19,3 +19,6 @@ order to keep track of their inventory.
 This application is of interest to me because I feel like 
 it would be useful tool if I were to ever open a store of my 
 own. I'm also curious as to how advanced I can make the application.
+
+## *User Stories*
+- As a user, I want to be able to add a shipment of products to my stores inventory.
