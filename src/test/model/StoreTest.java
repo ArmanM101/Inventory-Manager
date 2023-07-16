@@ -92,6 +92,8 @@ class StoreTest {
         assertEquals(testStore.findProduct(new Product("Milk", 1)), (testStore.findProduct(p1)));
         assertEquals(p2, (testStore.findProduct(p2)));
 
+        assertEquals(p3, testStore.findProduct(p3));
+
         testStore.addProduct(p3, 1);
         assertEquals(testStore.findProduct(new Product("Milk", 1)), (testStore.findProduct(p1)));
         assertEquals(p2, (testStore.findProduct(p2)));
