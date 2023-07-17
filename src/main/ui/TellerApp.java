@@ -24,12 +24,8 @@ public class TellerApp {
         boolean keepRunning;
         keepRunning = true;
         String userCommand;
-        userCommand = null;
-
         init();
-
         openStore();
-
         while (keepRunning) {
             displayMenu();
             userCommand = input.next();
@@ -40,13 +36,14 @@ public class TellerApp {
                 processCommand(userCommand);
             }
         }
-
         if (store.getBalance() > 0) {
-            System.out.println("Congrats your store, " + store.getName() + ", made $" + store.getBalance());
+            System.out.println("Your store, " + store.getName() + ", closed with a positive balance of "
+                    + store.getBalance());
         } else if (store.getBalance() == 0) {
-            System.out.println("Your store: " + store.getName() + " didn't make or lose money");
+            System.out.println("Your store, " + store.getName() + ", closed with a balance of 0");
         } else {
-            System.out.println("Sorry your store, " + store.getName() + ", lost $" + store.getBalance());
+            System.out.println("Your store,  " + store.getName() + ", closed with a negative balance of"
+                    + (-1 * store.getBalance()));
         }
     }
 
@@ -110,6 +107,8 @@ public class TellerApp {
         double priceDouble = Double.parseDouble(productPrice);
         product = new model.Product(productName, amountInt);
         store.addProduct(product, priceDouble);
+        System.out.println("You have successfully bought " + amountInt + " items of " + productName
+                + " for a total of $" + (amountInt * priceDouble) + ".");
         System.out.println("\nThe product order was successfully added to the inventory.");
     }
 
@@ -126,16 +125,22 @@ public class TellerApp {
         double priceDouble = Double.parseDouble(productPrice);
         product = new Product(productName, amountInt);
         Store replicant = new Store("replicant", 0);
+        soldOrderIfStatement(productName, productAmount, amountInt, priceDouble);
+    }
+
+    private void soldOrderIfStatement(String productName, String productAmount, int amountInt, double priceDouble) {
         if (!store.containsObject(product)) {
             System.out.print("\nSorry but you don't currently carry that item.");
         } else if (!store.checkEnoughProduct(product)) {
             System.out.print("\nSorry there's not enough of that item in stock to make to sale.");
         } else {
             if (store.sellProduct(product, priceDouble)) {
-                System.out.println("The sale successfully went through. However, you are now out of "
-                        + productName + ".");
+                System.out.println("You have successfully sold " + productAmount + " items of " + productName
+                        + " for a total of $" + (amountInt * priceDouble) + ". However, you are now out of "
+                        + productName);
             } else {
-                System.out.println("The sale successfully went through.");
+                System.out.println("You have successfully sold " + productAmount + " items of " + productName
+                        + " for a total of $" + (amountInt * priceDouble) + ".");
             }
         }
     }

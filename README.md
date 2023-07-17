@@ -22,3 +22,9 @@ own. I'm also curious as to how advanced I can make the application.
 
 ## *User Stories*
 - As a user, I want to be able to add a shipment of products to my stores inventory.
+- As a user, I want to be able to open my store with a given balance.
+- As a user, I want to be able to get receipts for each sale and purchase.
+- As a user, I want to be able to add a sale to my store and have it reflected in my Store's balance and inventory.
+- As a user, I want to be able to tell if my store had a negative or positive balance once I close it.
+- As a user, I want to be able to view my store's inventory to see what I have.
+- As a user, I want to be able to tell if I can make a sale with my given inventory.
