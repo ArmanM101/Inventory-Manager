@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import persistence.Writable;
 
 // Represents a store having a name, balance, and inventory.
-public class Store {
+public class Store implements Writable {
     private String name;
     private double balance;
     private ArrayList<Product> inventory;
@@ -100,7 +104,6 @@ public class Store {
         return false;
     }
 
-
     public String getName() {
         return name;
     }
@@ -113,5 +116,30 @@ public class Store {
         return inventory;
     }
 
+    // EFFECTS: creates a JSON object of the store
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("storeName", name);
+        json.put("balance", balance);
+        json.put("inventory", inventoryToJson());
+        return json;
+    }
 
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray inventoryToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Product p : inventory) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: just adds the product to the inventory without any other calculations
+    // MODIFIES: this
+    public void justAddProduct(Product pt) {
+        inventory.add(pt);
+    }
 }

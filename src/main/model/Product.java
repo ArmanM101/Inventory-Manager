@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a single Product
-public class Product {
+public class Product implements Writable {
     private int quantity;
     private String productName;
 
@@ -19,5 +22,14 @@ public class Product {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    //EFFECTS: Creates a JSON object of the product
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("productName", productName);
+        json.put("quantity", quantity);
+        return json;
     }
 }

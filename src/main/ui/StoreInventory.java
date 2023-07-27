@@ -2,7 +2,11 @@ package ui;
 
 import model.Product;
 import model.Store;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,11 +14,17 @@ import java.util.Scanner;
 public class StoreInventory {
     private Store store;
     private Product product;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/workroom.json";
 
     private Scanner input;
 
     // EFFECTS: runs the teller application
-    public StoreInventory() {
+    public StoreInventory() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runInventory();
     }
 
@@ -75,6 +85,8 @@ public class StoreInventory {
         System.out.println("\t3: View the store's current inventory.");
         System.out.println("\t4: View the store's current balance.");
         System.out.println("\t5: Close the business");
+        System.out.println("\t6. Save the business");
+        System.out.println("\t7. Load the business");
     }
 
     // MODIFIES: this
@@ -88,6 +100,10 @@ public class StoreInventory {
             viewInventory();
         } else if (command.equals("4")) {
             viewBalance();
+        } else if (command.equals("6")) {
+            saveStore();
+        } else if (command.equals("7")) {
+            loadWorkRoom();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -168,5 +184,28 @@ public class StoreInventory {
     // EFFECT: prints the stores balance
     private void viewBalance() {
         System.out.println("Your store's current balance is " + store.getBalance() + ".");
+    }
+
+    // EFFECTS: saves the store to file
+    private void saveStore() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(store);
+            jsonWriter.close();
+            System.out.println("Saved " + store.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads store from file
+    private void loadWorkRoom() {
+        try {
+            store = jsonReader.read();
+            System.out.println("Loaded " + store.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

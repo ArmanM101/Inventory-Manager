@@ -1,0 +1,14 @@
+{
+  "balance": 920,
+  "storeName": "Save on Foods",
+  "inventory": [
+    {
+      "quantity": 10,
+      "productName": "milk"
+    },
+    {
+      "quantity": 20,
+      "productName": "eggs"
+    }
+  ]
+}
