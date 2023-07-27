@@ -28,3 +28,5 @@ own. I'm also curious as to how advanced I can make the application.
 - As a user, I want to be able to tell if my store had a negative or positive balance once I close it.
 - As a user, I want to be able to view my store's inventory to see what I have.
 - As a user, I want to be able to tell if I can make a sale with my given inventory.
+- As a user, I want to be able to save my store and all its details (if I so choose to).
+- As a user, I want to be able to to be able to load my store and all its details (if I so choose to).

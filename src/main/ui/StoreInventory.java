@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 // Store inventory application
-public class TellerApp {
+public class StoreInventory {
     private Store store;
     private Product product;
 
     private Scanner input;
 
     // EFFECTS: runs the teller application
-    public TellerApp() {
-        runTeller();
+    public StoreInventory() {
+        runInventory();
     }
 
     // MODIFIES: this
     // EFFECTS: takes user input
-    private void runTeller() {
+    private void runInventory() {
         boolean keepRunning;
         keepRunning = true;
         String userCommand;
@@ -128,6 +128,9 @@ public class TellerApp {
         soldOrderIfStatement(productName, productAmount, amountInt, priceDouble);
     }
 
+    // MODIFIES: this
+    // EFFECTS: attempts to make a sale of a number of items, if the sale can't go through, it tells the user why
+    // and if it can go through it makes the sale and updates the balance and inventory.
     private void soldOrderIfStatement(String productName, String productAmount, int amountInt, double priceDouble) {
         if (!store.containsObject(product)) {
             System.out.print("\nSorry but you don't currently carry that item.");
