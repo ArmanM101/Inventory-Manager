@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 
+// Code was created using https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git as a model
 // Represents a writer that writes JSON representation of Store to file
 public class JsonWriter {
     private static final int TAB = 4;

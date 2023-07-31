@@ -10,6 +10,7 @@ import model.Product;
 import model.Store;
 import org.json.*;
 
+// Code was created using https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git as a model
 // Represents a reader that reads workroom from JSON data stored in file
 public class JsonReader {
     private String source;
