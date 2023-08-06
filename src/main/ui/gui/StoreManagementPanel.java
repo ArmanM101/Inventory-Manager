@@ -1,11 +1,14 @@
 package ui.gui;
 
 import model.Store;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 public class StoreManagementPanel extends JPanel {
     private JPanel top;
@@ -21,6 +24,9 @@ public class StoreManagementPanel extends JPanel {
     private JButton closeStore;
     private Store store;
     private StoreInventoryGUI mainGUI;
+    private JsonWriter jsonWriter;
+    private static final String JSON_STORE = "./data/workroom.json";
+
 
     public StoreManagementPanel(Store store, StoreInventoryGUI mainGUI) {
         this.store = store;
@@ -72,8 +78,30 @@ public class StoreManagementPanel extends JPanel {
         });
         bottom.add(transaction);
         save = new JButton("Save Store");
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    jsonWriter = new JsonWriter(JSON_STORE);
+                    jsonWriter.open();
+                    jsonWriter.write(store);
+                    jsonWriter.close();
+                    JOptionPane.showMessageDialog(mainGUI, "Saved " + store.getName() + " to " + JSON_STORE);
+                } catch (FileNotFoundException c) {
+                    JOptionPane.showMessageDialog(mainGUI, "Unable to write to file: " + JSON_STORE);
+                }
+            }
+        });
         bottom.add(save);
         closeStore = new JButton("Close Store");
         bottom.add(closeStore);
+        closeStore.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(mainGUI,"Your store, " + store.getName()
+                        + ", closes with a balance of " + store.getBalance());
+                System.exit(0);
+            }
+        });
     }
 }
