@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 // Store inventory application
-public class StoreInventory {
+public class StoreInventoryConsole {
     private Store store;
     private Product product;
     private JsonWriter jsonWriter;
@@ -21,7 +21,7 @@ public class StoreInventory {
     private Scanner input;
 
     // EFFECTS: runs the teller application
-    public StoreInventory() throws FileNotFoundException {
+    public StoreInventoryConsole() throws FileNotFoundException {
         input = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
