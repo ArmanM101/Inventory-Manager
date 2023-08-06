@@ -22,6 +22,8 @@ public class CreationPanel extends JPanel {
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/workroom.json";
 
+    // MODIFIES: this
+    // EFFECTS: creates the creation panel and then adds all its components
     public CreationPanel(StoreInventoryGUI mainGUI) {
         this.mainGUI = mainGUI;
         setLayout(new GridBagLayout());

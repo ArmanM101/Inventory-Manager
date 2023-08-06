@@ -27,7 +27,8 @@ public class StoreManagementPanel extends JPanel {
     private JsonWriter jsonWriter;
     private static final String JSON_STORE = "./data/workroom.json";
 
-
+    // MODIFIES: this
+    // EFFECTS: creates the store management panel and then adds all its components
     public StoreManagementPanel(Store store, StoreInventoryGUI mainGUI) {
         this.store = store;
         this.mainGUI = mainGUI;
@@ -40,6 +41,8 @@ public class StoreManagementPanel extends JPanel {
         add(bottom);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the top panel of the Store Management panel and then adds all its components
     public void createTop() {
         top = new JPanel();
         top.setLayout(new FlowLayout());
@@ -50,6 +53,8 @@ public class StoreManagementPanel extends JPanel {
         top.add(currentBal);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the middle panel of the Store Management panel and then adds all its components
     public void createMiddle() {
         middle = new JPanel();
         middle.setLayout(new BoxLayout(middle, BoxLayout.PAGE_AXIS));
@@ -66,9 +71,23 @@ public class StoreManagementPanel extends JPanel {
         middle.add(inventory);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the bottom panel of the Store Management panel and then adds all its components
     public void createBottom() {
         bottom = new JPanel();
         bottom.setLayout(new FlowLayout());
+
+        buttonCreationTransaction();
+
+        buttonCreationSaveStore();
+
+        buttonCreationCloseStore();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates the Enter Transaction button and adds it to the bottom panel, also adds an action event where
+    // if pressed, it tells the mainGUI to move onto the transaction panel
+    public void buttonCreationTransaction() {
         transaction = new JButton("Enter Transaction");
         transaction.addActionListener(new ActionListener() {
             @Override
@@ -77,6 +96,12 @@ public class StoreManagementPanel extends JPanel {
             }
         });
         bottom.add(transaction);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates the Save Store button and adds it to the bottom panel, also adds an action event where if the
+    // button is pressed then it tries to save the store and if it can't, it gives an error message
+    public void buttonCreationSaveStore() {
         save = new JButton("Save Store");
         save.addActionListener(new ActionListener() {
             @Override
@@ -93,6 +118,12 @@ public class StoreManagementPanel extends JPanel {
             }
         });
         bottom.add(save);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates the Close Store button and adds it to the bottom panel, also adds an action event
+    // where if pressed, the user is given a message of how much the store made and then the application closes
+    public void buttonCreationCloseStore() {
         closeStore = new JButton("Close Store");
         bottom.add(closeStore);
         closeStore.addActionListener(new ActionListener() {
