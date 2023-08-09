@@ -22,6 +22,7 @@ public class TransactionPanel extends JPanel {
     private JTextField priceInput;
     private JButton sell;
     private JButton buy;
+    private Icon icon = new ImageIcon("data/X-mark.png");
 
     // MODIFIES: this
     // EFFECTS: creates the Transaction panel and then adds all its components
@@ -109,10 +110,11 @@ public class TransactionPanel extends JPanel {
         double productPrice = Double.parseDouble(priceInput.getText());
         Product product = new Product(productName, productAmount);
         if (!store.containsObject(product)) {
-            JOptionPane.showMessageDialog(mainGUI, "Sorry but you don't currently carry that item.");
+            JOptionPane.showMessageDialog(mainGUI, "Sorry but you don't currently carry that item.",
+                    "Error", JOptionPane.PLAIN_MESSAGE, icon);
         } else if (!store.checkEnoughProduct(product)) {
             JOptionPane.showMessageDialog(mainGUI, "Sorry there's not enough of "
-                    + "that item in stock to make to sale.");
+                    + "that item in stock to make to sale.", "Error", JOptionPane.PLAIN_MESSAGE, icon);
         } else {
             if (store.sellProduct(product, productPrice)) {
                 JOptionPane.showMessageDialog(mainGUI, "You have successfully sold " + productAmount

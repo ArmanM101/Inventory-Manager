@@ -92,7 +92,9 @@ public class CreationPanel extends JPanel {
                     Store store = new Store(storeName, storeBal);
                     mainGUI.moveToStoreManagementPanel(store);
                 } catch (NumberFormatException a) {
-                    JOptionPane.showMessageDialog(mainGUI, "Not a valid starting balance");
+                    Icon x = new ImageIcon("data/X-mark.png");
+                    JOptionPane.showMessageDialog(mainGUI, "Not a valid starting balance",
+                            "Error", JOptionPane.PLAIN_MESSAGE, x);
                 }
             }
         });
@@ -118,7 +120,9 @@ public class CreationPanel extends JPanel {
                     JOptionPane.showMessageDialog(mainGUI, "Loaded " + store.getName() + " from " + JSON_STORE);
                     mainGUI.moveToStoreManagementPanel(store);
                 } catch (IOException a) {
-                    JOptionPane.showMessageDialog(mainGUI, "Unable to read from file: " + JSON_STORE);
+                    Icon x = new ImageIcon("data/X-mark.png");
+                    JOptionPane.showMessageDialog(mainGUI, "Unable to read from file: " + JSON_STORE,
+                            "Error", JOptionPane.PLAIN_MESSAGE, x);
                 }
             }
         });
