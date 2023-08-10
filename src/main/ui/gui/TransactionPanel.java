@@ -1,6 +1,7 @@
 package ui.gui;
 
 import model.Product;
+import model.Store;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TransactionPanel extends JPanel {
-    private model.Store store;
+    private Store store;
     private StoreInventoryGUI mainGUI;
     private JPanel layer1;
     private JPanel layer2;
