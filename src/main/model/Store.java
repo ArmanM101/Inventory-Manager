@@ -22,6 +22,8 @@ public class Store implements Writable {
         this.name = name;
         this.balance = initialBalance;
         this.inventory = new ArrayList<>();
+        EventLog.getInstance().logEvent(new Event("Created the store " + name
+                + " with a starting balance of $ " + initialBalance));
     }
 
     // EFFECTS: adds/subtracts amount to the balance
@@ -48,6 +50,8 @@ public class Store implements Writable {
         } else {
             inventory.add(item);
         }
+        EventLog.getInstance().logEvent(new Event("Purchased " + itemNum + " units of " + itemName
+                + " for $" + (-1 * moneyLost)));
     }
 
     // REQUIRES: the product must already exist in the inventory
@@ -87,10 +91,14 @@ public class Store implements Writable {
         item = findProduct(item);
         inventory.remove(item);
         if ((originalNum - itemNum) == 0) {
+            EventLog.getInstance().logEvent(new Event("Sold " + itemNum + " units of " + itemName
+                    + " for $" + moneyGained));
             return true;
         }
         Product replacement = new Product(itemName, originalNum - itemNum);
         inventory.add(replacement);
+        EventLog.getInstance().logEvent(new Event("Sold " + itemNum + " units of " + itemName
+                + " for $" + moneyGained));
         return false;
     }
 
@@ -123,6 +131,7 @@ public class Store implements Writable {
         json.put("storeName", name);
         json.put("balance", balance);
         json.put("inventory", inventoryToJson());
+        EventLog.getInstance().logEvent(new Event("Saved the store " + name));
         return json;
     }
 

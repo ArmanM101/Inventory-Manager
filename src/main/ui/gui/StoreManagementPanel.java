@@ -1,5 +1,6 @@
 package ui.gui;
 
+import model.EventLog;
 import model.Store;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -131,6 +132,10 @@ public class StoreManagementPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(mainGUI,"Your store, " + store.getName()
                         + ", closes with a balance of " + store.getBalance());
+                EventLog el = EventLog.getInstance();
+                for (model.Event next : el) {
+                    System.out.println(next.toString());
+                }
                 System.exit(0);
             }
         });
